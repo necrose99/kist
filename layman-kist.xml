@@ -2,7 +2,7 @@
 <layman>
    <overlay 
       type="svn" 
-      src="http://kist-overlay.googlecode.com/svn/trunk/" 
+      src="http://kist.googlecode.com/svn/trunk/" 
       name="kist-overlay" 
       contact="garrappachc@gmail.com">
 	
