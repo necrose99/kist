@@ -1,0 +1,6 @@
+#!/bin/bash                                                                            
+AIR_PATH=/opt/Adobe/AirSDK/bin/adl 
+APPS_PATH=/opt/AIR-apps 
+  
+# this is all one line 
+${AIR_PATH} -nodebug "${APPS_PATH}/ipla-lite/META-INF/AIR/application.xml" "${APPS_PATH}/ipla-lite" 
