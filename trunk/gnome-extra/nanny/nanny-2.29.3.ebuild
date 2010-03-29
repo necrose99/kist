@@ -36,6 +36,8 @@ src_configure() {
 
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
-	dodoc AUTHORS ABOUT_* ChangeLog FAQ NEWS README || die "dodoc failed"
-	doman "man/${PN}.1" || die "doman failed"
+}
+
+pkg_postinst() {
+	elog "Installed."
 }
