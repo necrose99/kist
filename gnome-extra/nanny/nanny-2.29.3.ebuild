@@ -17,6 +17,7 @@ DEPEND="x11-libs/gtk+
 	media-libs/alsa-lib
 	>=dev-lang/python-2.4
 	dev-python/twisted
+	dev-python/twisted-web
 	>=gnome-base/gnome-desktop-2.26.0
 	gnome-base/libglade
 	gnome-base/libgtop
