@@ -23,7 +23,8 @@ DEPEND="x11-libs/gtk+
 	gnome-base/libgtop
 	x11-libs/pango
 	dev-perl/Cairo
-	dev-util/pkgconfig"
+	dev-util/pkgconfig
+	dev-python/imaging"
 
 RDEPEND="${DEPEND}"
 
