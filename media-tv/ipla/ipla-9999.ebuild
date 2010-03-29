@@ -76,11 +76,4 @@ pkg_postinst() {
 	elog ""
 	elog "You can run ipla by typing \"ipla\" in terminal."
 	elog ""
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
-}
-
-pkg_postrm() {
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
 }
