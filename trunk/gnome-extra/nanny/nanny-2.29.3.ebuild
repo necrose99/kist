@@ -24,7 +24,8 @@ DEPEND="x11-libs/gtk+
 	x11-libs/pango
 	dev-perl/Cairo
 	dev-util/pkgconfig
-	dev-python/imaging"
+	dev-python/imaging
+	dev-python/hachoir-regex"
 
 RDEPEND="${DEPEND}"
 
