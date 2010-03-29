@@ -39,5 +39,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "Installed."
+	elog "This is development version, so not everything"
+	elog "may work. What is more, you have to learn how to"
+	elog "use this program on your own. Good luck."
 }
