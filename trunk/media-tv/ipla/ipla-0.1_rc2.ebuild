@@ -31,18 +31,20 @@ src_unpack() {
 		fi
 	done
 	if use amd64 ; then
-		for i in ${A}; do
+		if [[ ${i} = *.deb ]]; then
 			ar x "${DISTDIR}"/${i}
-			if [[ ${i} = *.deb ]]; then
-				if [[ -e "${WORKDIR}"/data.tar.lzma ]]; then
-					mv "${WORKDIR}"/data.tar.lzma "${WORKDIR}"/${i%%_*}.tar.lzma
-				elif [[ -e "${WORKDIR}"/data.tar.gz ]]; then
-					mv "${WORKDIR}"/data.tar.gz "${WORKDIR}"/${i%%_*}.tar.gz
-				else
-					die "Can't find data from ${i}"
+			for i in ${A}; do
+				if [[ ${i} = *.deb ]]; then
+					if [[ -e "${WORKDIR}"/data.tar.lzma ]]; then
+						mv "${WORKDIR}"/data.tar.lzma "${WORKDIR}"/${i%%_*}.tar.lzma
+					elif [[ -e "${WORKDIR}"/data.tar.gz ]]; then
+						mv "${WORKDIR}"/data.tar.gz "${WORKDIR}"/${i%%_*}.tar.gz
+					else
+						die "Can't find data from ${i}"
+					fi
 				fi
-			fi
-		done
+			done
+		fi
 	fi
 }
 
@@ -52,13 +54,17 @@ src_install() {
 	dodir /opt/AIR-apps || die
 	dodir /opt/AIR-apps/ipla-lite || die
 
-	mv ${WORKDIR}/ipla/* ${D}/opt/AIR-apps/ipla-lite || die
+	mv "${WORKDIR}"/ipla/* ${D}/opt/AIR-apps/ipla-lite || die
 	exeinto /usr/bin
 	doexe ${DISTDIR}/ipla
 	chmod +x ${D}/usr/bin/ipla
 	if use amd64 ; then
-		tar -xzf ${WORKDIR}/libgnome-keyring0.tar.gz
-		mv ${WORKDIR}/usr/lib/* /usr/lib32/
+		tar -xzf "${WORKDIR}"/libgnome-keyring0.tar.gz -C ${WORKDIR} || die
+#		into /usr/lib32
+#		dolib "${WORKDIR}"/usr/lib/libgnome-keyring.so.0.1.1 || die "lib fail"
+		dodir /usr/lib32
+		cp ${WORKDIR}/usr/lib/libgnome-keyring.so.0.1.1 ${D}/usr/lib32/libgnome-keyring.so.0.1.1 || die "moving failed"
+		ln -s ${D}/usr/lib32/libgnome-keyring.so.0.1.1 ${D}/usr/lib32/libgnome-keyring.so.0
 	fi
 }
 
