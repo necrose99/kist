@@ -30,7 +30,8 @@ DEPEND=">=dev-lang/mono-2.4
         dev-dotnet/dbus-sharp
         dev-dotnet/dbus-glib-sharp
         x11-libs/gtk+
-        dev-libs/glib"
+        dev-libs/glib
+	dev-dotnet/mono-addins"
 RDEPEND="${DEPEND}"
 
 src_install() {
