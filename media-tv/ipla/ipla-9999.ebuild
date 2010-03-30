@@ -10,11 +10,12 @@ SRC_BASE="http://ipla.pl/templates/ipla/assets/iplalite.air
 	http://kist.googlecode.com/svn/branches/ipla"
 SRC_URI="
 	x86? ( ${SRC_BASE} )
-	amd64? ( ${SRC_BASE} http://mirrors.kernel.org/ubuntu/pool/main/g/gnome-keyring/libgnome-keyring0_2.28.1-0ubuntu1_i386.deb )"
+	amd64? ( ${SRC_BASE} ftp://ftp.icm.edu.pl/vol/rzm1/linux-ibiblio/distributions/unity/repo/2009/i586/unity/libgnome-keyring0-2.28.1-1-unity2009.i586.rpm )"
 HOMEPAGE="http://www.ipla.pl"
 IUSE=""
 DEPEND="app-arch/unzip
 	dev-util/adobe-air-sdk-bin
+	app-arch/rpm2targz
 	>=gnome-base/gnome-keyring-2.28.1"
 RDEPEND=""
 
@@ -31,20 +32,14 @@ src_unpack() {
 		fi
 	done
 	if use amd64 ; then
-		if [[ ${i} = *.deb ]]; then
-			ar x "${DISTDIR}"/${i}
-			for i in ${A}; do
-				if [[ ${i} = *.deb ]]; then
-					if [[ -e "${WORKDIR}"/data.tar.lzma ]]; then
-						mv "${WORKDIR}"/data.tar.lzma "${WORKDIR}"/${i%%_*}.tar.lzma
-					elif [[ -e "${WORKDIR}"/data.tar.gz ]]; then
-						mv "${WORKDIR}"/data.tar.gz "${WORKDIR}"/${i%%_*}.tar.gz
-					else
-						die "Can't find data from ${i}"
-					fi
-				fi
-			done
-		fi
+		for i in ${A}; do
+			if [[ ${i} = *.rpm ]]; then
+				mkdir ${WORKDIR}/libgnome-keyring || die
+				cd ${WORKDIR} || die
+				rpm2targz ${DISTDIR}/${i} || die
+				tar -xzf libgnome-keyring0-2.28.1-1-unity2009.i586.tar.gz -C ${WORKDIR}/libgnome-keyring || die
+			fi
+		done
 	fi
 }
 
@@ -59,11 +54,8 @@ src_install() {
 	doexe ${DISTDIR}/ipla
 	chmod +x ${D}/usr/bin/ipla
 	if use amd64 ; then
-		tar -xzf "${WORKDIR}"/libgnome-keyring0.tar.gz -C ${WORKDIR} || die
-#		into /usr/lib32
-#		dolib "${WORKDIR}"/usr/lib/libgnome-keyring.so.0.1.1 || die "lib fail"
 		dodir /usr/lib32
-		cp ${WORKDIR}/usr/lib/libgnome-keyring.so.0.1.1 ${D}/usr/lib32/libgnome-keyring.so.0.1.1 || die "moving failed"
+		cp ${WORKDIR}/libgnome-keyring/usr/lib/libgnome-keyring.so.0.1.1 ${D}/usr/lib32/libgnome-keyring.so.0.1.1 || die "moving failed"
 		ln -s ${D}/usr/lib32/libgnome-keyring.so.0.1.1 ${D}/usr/lib32/libgnome-keyring.so.0
 	fi
 }
