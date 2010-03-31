@@ -52,8 +52,11 @@ pkg_setup() {
                 $(use_with vala)"
 }
 
-pkg_postinst() {
+pkg_preinst() {
 	dosym /usr/lib/libawn.so.1.0.1 /usr/lib/libawn.so.0
+}
+
+pkg_postinst() {
 	gnome2_pkg_postinst
 	python_mod_optimize $(python_get_sitedir)/awn
 }
