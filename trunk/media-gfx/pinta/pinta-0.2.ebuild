@@ -29,8 +29,8 @@ src_unpack() {
 }
 
 src_compile() {
-	dodir /root
-	dodir /root/.config
+	dodir ${WORKDIR}/root
+	dodir ${WORKDIR}/root/.config
 	cd ${WORKDIR}/jpobst-Pinta-0508750 || die
 	xbuild Pinta.sln || die "Compiling failed!"
 	xbuild Pinta/Pinta.csproj || die "Compile failed!"
