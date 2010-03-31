@@ -53,6 +53,7 @@ pkg_setup() {
 }
 
 pkg_postinst() {
+	dosym /usr/lib/libawn.so.1.0.1 /usr/lib/libawn.so.0
 	gnome2_pkg_postinst
 	python_mod_optimize $(python_get_sitedir)/awn
 }
