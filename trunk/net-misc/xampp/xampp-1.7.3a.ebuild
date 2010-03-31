@@ -26,7 +26,7 @@ src_install() {
 	cp -r ${WORKDIR}/* ${D}/opt
 }	
 
-src_postinst() {
+pkg_postinst() {
 	elog "Please visit http://www.apachefriends.org/en/xampp-linux.html#377"
 	elog "for further information."
 	elog ""
