@@ -42,9 +42,6 @@ S="${WORKDIR}/${P/_/~}"
 
 pkg_setup() {
 	G2CONF="${G2CONF}
-		--disable-pymod-checks
-		--disable-shave
-		--disable-static
 		--with-gconf-schema-file-dir=/etc/gconf/schemas
 		--with-html-dir=/usr/share/doc/${PF}/html
 		$(use_enable nls)
