@@ -8,7 +8,7 @@ inherit gnome2 python
 
 PVS="0.4"
 
-DESCRIPTION="Fully customisable dock-like window navigator."
+DESCRIPTION="Fully customisable dock-like window navigator"
 HOMEPAGE="https://launchpad.net/awn"
 SRC_URI="http://launchpad.net/awn/${PVS}/${PV/_rc1}/+download/${P/_/~}.tar.gz"
 LICENSE="GPL-2 LGPL-2.1"
@@ -42,6 +42,9 @@ S="${WORKDIR}/${P/_/~}"
 
 pkg_setup() {
 	G2CONF="${G2CONF}
+		--disable-pymod-checks
+		--disable-shave
+		--disable-static
 		--with-gconf-schema-file-dir=/etc/gconf/schemas
 		--with-html-dir=/usr/share/doc/${PF}/html
 		$(use_enable nls)
@@ -49,9 +52,7 @@ pkg_setup() {
                 $(use_with vala)"
 }
 
-pkg_preinst() {
-	dosym /usr/lib/libawn.so.1.0.1 /usr/lib/libawn.so.0
-}
+DOCS="AUTHORS ChangeLog NEWS README"
 
 pkg_postinst() {
 	gnome2_pkg_postinst
