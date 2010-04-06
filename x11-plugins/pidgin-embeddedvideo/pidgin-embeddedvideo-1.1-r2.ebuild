@@ -22,8 +22,7 @@ pkg_setup() {
 }
 
 src_compile() {
-	cd ${S}
-	make
+	emake -j1 || die "Emake failed!"
 }
 
 src_install() {
