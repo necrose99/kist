@@ -61,6 +61,7 @@ src_install() {
 		cp ${WORKDIR}/usr/lib/libsmime3.so ${D}/usr/lib32/ || die "Making lib failed: libsmime3.so"
 		cp ${WORKDIR}/usr/lib/libnss3.so ${D}/usr/lib32/ || die "Making lib failed: libnss3.so"
 		cp ${WORKDIR}/usr/lib/libsoftokn3.so ${D}/usr/lib32 || die "Making lib failed: libsoftokn3.so"
+		cp ${WORKDIR}/usr/lib/libssl3.so ${D}/usr/lib32 || die "Making lib failed: libssl4.so"
 		dosym /usr/lib32/nspr/libnspr4.so.8 /usr/lib32/libnspr4.so || die "Linking lib failed: libnspr4.so"
 		dosym /usr/lib32/nspr/libplc4.so.8 /usr/lib32/libplc4.so || die "Linking lib failed: libplc4.so"
 		dosym /usr/lib32/nspr/libplds4.so.8 /usr/lib32/libplds4.so || die "Linking lib failed: libplds4.so"
