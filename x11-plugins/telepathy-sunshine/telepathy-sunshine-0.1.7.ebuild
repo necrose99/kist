@@ -14,7 +14,9 @@ IUSE=""
 DEPEND="net-im/empathy
 		>=dev-lang/python-2.6
 		sys-devel/automake
-		dev-python/twisted"
+		dev-python/twisted
+		>=dev-python/telepathy-python-0.15.17
+		dev-python/twisted-web"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/telepathy-sunshine"
