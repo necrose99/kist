@@ -13,7 +13,8 @@ HOMEPAGE="http://git.collabora.co.uk/?p=user/kkszysiu/telepathy-sunshine.git;a=s
 IUSE=""
 DEPEND="net-im/empathy
 		>=dev-lang/python-2.6
-		sys-devel/automake"
+		sys-devel/automake
+		dev-python/twisted"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/telepathy-sunshine"
