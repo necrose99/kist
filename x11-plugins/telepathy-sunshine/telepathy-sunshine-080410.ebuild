@@ -16,7 +16,8 @@ DEPEND="net-im/empathy
 		sys-devel/automake
 		dev-python/twisted
 		>=dev-python/telepathy-python-0.15.17
-		dev-python/twisted-web"
+		dev-python/twisted-web
+		net-voip/telepathy-butterfly"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/telepathy-sunshine"
