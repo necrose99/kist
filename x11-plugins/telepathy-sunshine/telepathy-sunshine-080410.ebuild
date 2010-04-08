@@ -6,7 +6,7 @@ EAPI="2"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 DESCRIPTION="Telepathy-sunshine is the Gadu-Gadu connection manager for Telepathy"
 SRC_URI="http://www.kist-overlay-packages.yoyo.pl/${P}.tar.gz"
 HOMEPAGE="http://git.collabora.co.uk/?p=user/kkszysiu/telepathy-sunshine.git;a=summary"
