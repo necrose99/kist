@@ -10,7 +10,7 @@ SRC_BASE="http://ipla.pl/templates/ipla/assets/iplalite.air
 	http://kist.googlecode.com/svn/branches/ipla"
 SRC_URI="
 	x86? ( ${SRC_BASE} )
-	amd64? ( ${SRC_BASE} ftp://ftp.icm.edu.pl/vol/rzm1/linux-ibiblio/distributions/unity/repo/2009/i586/unity/libgnome-keyring0-2.28.1-1-unity2009.i586.rpm )"
+	amd64? ( ${SRC_BASE} ftp://ftp.icm.edu.pl/vol/rzm1/linux-fedora/linux/development/rawhide/i386/os/Packages/libgnome-keyring-2.30.1-1.fc14.i686.rpm )"
 HOMEPAGE="http://www.ipla.pl"
 IUSE=""
 DEPEND="app-arch/unzip
