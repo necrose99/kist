@@ -17,7 +17,7 @@ SRC_URI=""
 LICENSE="LGPL-2.1 GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="debug gnome gnome-vfs xfce"
+IUSE="debug glade gnome gnome-vfs xfce"
 
 RDEPEND=">=dev-libs/glib-2.16
 	>=x11-libs/gtk+-2.12
@@ -58,6 +58,7 @@ src_configure() {
 		--config-backends=${cfg} \
 		--desktop-entry-backends=${de} \
 		--vfs-backends=${vfs} \
+		$(use_with glade) \
 		${myconf} || die "configure failed"
 }
 
