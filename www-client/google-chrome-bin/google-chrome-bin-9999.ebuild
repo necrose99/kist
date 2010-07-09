@@ -6,7 +6,7 @@ EAPI="2"
 
 inherit eutils toolchain-funcs versionator
 
-MY_PN="${PN%-bin}-beta"
+MY_PN="${PN%-bin}-unstable"
 SRC_BASE="http://dl.google.com/linux/direct/"
 DESCRIPTION="A browser that combines a minimal design with sophisticated technology"
 HOMEPAGE="http://www.google.com/chrome"
