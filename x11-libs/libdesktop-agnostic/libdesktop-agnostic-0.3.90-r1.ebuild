@@ -76,6 +76,7 @@ src_configure() {
 
 src_compile() {
 	./waf
+	sed -i 's|repository version="1.1"|repository version="1.0"|' build/default/libdesktop-agnostic/DesktopAgnostic*.gir
 	sed -i 's|repository version="1.2"|repository version="1.0"|' build/default/libdesktop-agnostic/DesktopAgnostic*.gir
 	./waf || die "Build failed"
 }
