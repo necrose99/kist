@@ -8,7 +8,7 @@ SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~x86 ~amd64"
 DESCRIPTION="Telepathy-sunshine is the Gadu-Gadu connection manager for Telepathy"
-SRC_URI="http://www.kist-overlay-packages.yoyo.pl/${P}.tar.gz"
+SRC_URI="http://telepathy.freedesktop.org/releases/telepathy-sunshine/${P}.tar.gz"
 HOMEPAGE="http://git.collabora.co.uk/?p=user/kkszysiu/telepathy-sunshine.git;a=summary"
 IUSE=""
 DEPEND="net-im/empathy
@@ -18,21 +18,6 @@ DEPEND="net-im/empathy
 		>=dev-python/telepathy-python-0.15.17
 		dev-python/twisted-web"
 RDEPEND="${DEPEND}"
-
-S="${WORKDIR}/telepathy-sunshine"
-
-src_unpack() {
-	unpack ${A}
-}
-
-src_configure() {
-	cd $S
-	./autogen.sh --prefix=/usr || die "Autogen.sh failed!"
-}
-
-src_compile() {
-	emake || die "emake failed"
-}
 
 src_install() {
 	emake install DESTDIR="${D}" || die "install failed"
