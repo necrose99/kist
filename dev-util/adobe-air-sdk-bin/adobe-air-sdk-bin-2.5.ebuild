@@ -12,12 +12,20 @@ SRC_URI="http://airdownload.adobe.com/air/lin/download/${PV}/AdobeAIRSDK.tbz2 ->
 
 LICENSE="AdobeAirSDK"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="app-arch/unzip
+	x86? ( dev-libs/libxml2
+		dev-libs/nspr
+		dev-libs/nss
+		media-libs/libpng
+		net-misc/curl
+		www-plugins/adobe-flash
+		x11-libs/cairo
+		x11-libs/gtk+ )
 	amd64? ( app-emulation/emul-linux-x86-baselibs
-	app-emulation/emul-linux-x86-gtklibs )"
+		app-emulation/emul-linux-x86-gtklibs )"
 
 QA_PRESTRIPPED=".*\.so
 	/opt/Adobe/AirSDK/bin/adl"
@@ -28,25 +36,30 @@ src_install() {
 	local rtdir='runtimes/air/linux/Adobe AIR/Versions/1.0'
 
 	# remove the broken symlinks
-	rm -r "${rtdir}"/Resources/nss3/{0d,1d,None} || die
+	rm -r "${rtdir}"/Resources/nss3/{0d,1d} || die "removing cruft failed"
+	if use x86; then
+		rm "${rtdir}"/Resources/lib{curl,flashplayer}.so || die "removing cruft failed"
+	fi
 
 	insinto /${sdkdir}
-	doins -r * || die
+	doins -r * || die "doins failed"
 
-	cd "${D}" || die
-	fperms 0755 ${sdkdir}/bin/* ${sdkdir}/"${rtdir}"/{libCore.so,Resources/lib*.so*} || die
+	cd "${D}"
+	fperms 0755 ${sdkdir}/bin/* ${sdkdir}/"${rtdir}"/{libCore.so,Resources/lib*.so*} \
+		|| die "chmod failed"
 
-	make_wrapper adl /${sdkdir}/bin/adl . /usr/lib32:/usr/lib32/nss:/usr/lib32/nspr /opt/bin
+	use x86 && make_wrapper adl /${sdkdir}/bin/adl . /usr/lib/nss:/usr/lib/nspr:/opt/netscape/plugins /opt/bin
+	use amd64 && make_wrapper adl /${sdkdir}/bin/adl . /usr/lib32:/usr/lib32/nss:/usr/lib32/nspr /opt/bin
 
 	exeinto /opt/bin
-	doexe "${FILESDIR}"/airstart || die
+	doexe "${FILESDIR}"/airstart || die "doexe failed"
 
 	# install the file association
 	# (we can't use make_desktop_entry because we like to have NoDisplay)
-	domenu "${FILESDIR}"/airstart.desktop || die
+	domenu "${FILESDIR}"/airstart.desktop || die "domenu failed"
 
 	insinto /usr/share/mime/packages
-	doins "${FILESDIR}"/${PN}.xml || die
+	doins "${FILESDIR}"/${PN}.xml || die "doins failed"
 }
 
 pkg_postinst() {
