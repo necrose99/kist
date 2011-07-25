@@ -29,7 +29,6 @@ RDEPEND="
 	gnome-base/gconf
 	media-libs/fontconfig
 	media-libs/freetype
-	media-libs/jpeg:62
 	>=sys-devel/gcc-4.2[-nocxx]
 	x11-libs/cairo
 	x11-libs/gtk+:2
